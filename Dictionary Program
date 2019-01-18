@@ -1,0 +1,71 @@
+public class MyClass {
+    
+    public static void main(String args[]) {
+        String str = "i am your and you are mine";
+        int length = 0;
+        char ch;
+        for(int i=0; i<str.length(); i++){
+            ch = str.charAt(i);
+            if(ch == ' ')
+                length++;
+        }
+        length++;
+        String[] strArr = new String[length];
+        int index = 0;
+        String token = "";
+        for(int i=0; i<str.length(); i++){
+            ch = str.charAt(i);
+            if(ch == ' '){
+                strArr[index] = token;
+                index++;
+                token = "";
+            }else{
+                token = token + ch;
+            }
+            strArr[index] = token;
+        }
+        String temp = "";
+        for(int i = 0; i<length; i++){
+            for(int j = i+1; j<length; j++){
+                if(comp(strArr[i], strArr[j])==2){
+                    temp = strArr[i];
+                    strArr[i] = strArr[j];
+                    strArr[j] = temp;
+                }
+            }
+        }
+        for(String strs: strArr){
+            System.out.print(strs);
+            System.out.print(" ");
+        }
+    }
+    public static int comp(String str1, String str2) {
+        
+        int len1 = str1.length();
+        int len2 = str2.length();
+        int flag = 0;
+        int lenFlag = 0;
+        
+        if(len1>len2)
+            lenFlag = 1;
+            
+            for(int i = 0, j = 0; i<len1 && j<len2; i++,j++){
+                
+                if(str1.charAt(i)>str2.charAt(j)){
+                    flag = 1;
+                    break;
+                }else if(str1.charAt(i)<str2.charAt(j)){
+                    flag = 2;
+                    break;
+                }             
+                
+            }
+            if(flag==1){
+                return 2;
+            }else if(flag==0 && lenFlag==1){
+                return 2;
+            }else{
+                return 1;
+            }
+        }
+    }
